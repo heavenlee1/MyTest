@@ -40,56 +40,105 @@
 </head>
 <body>
     <div class="container">
-        <h1>減重比賽計算器</h1>
+        <h2 id="main-heading">減重比賽計算器</h2>
 		
 		<button id="btnMan1" onclick="setDefaultValuesMan1()" class="btn btn-outline-primary">定遠</button>
 		<button id="btnMan2" onclick="setDefaultValuesMan2()" class="btn btn-outline-primary">やす</button>
 		<button id="btnWoman1" onclick="setDefaultValuesWoman()" class="btn btn-outline-primary">Miya</button>
-		
-        <div class="form-group">
-            <label for="currentWeight">現行體重_CurrentWeight (kg):</label>
-            <input id="currentWeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    身高_Height
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+							<label for="standardHeight">標準_Standard (cm):</label>
+							<input id="standardHeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="mb-3">
+							<label for="currentHeight">現行_Current (cm):</label>
+							<input id="currentHeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                   </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="postWeight">賽後體重_PostWeight (kg):</label>
-            <input id="postWeight" type="number" step="0.1" class="form-control">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    體重_Weight
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+							<label for="standardWeight">標準_Standard (kg):</label>
+							<input id="standardWeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                         <div class="mb-3">
+							<label for="currentWeight">現行_Current (kg):</label>
+							<input id="currentWeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="mb-3">
+							<label for="postWeight">賽後_Post (kg):</label>
+							<input id="postWeight" type="number" step="0.1" class="form-control">
+                        </div>
+                   </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="standardWeight">標準體重_StandardWeight (kg):</label>
-            <input id="standardWeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    體脂肪率_BF
+                </div>
+                <div class="card-body">
+                    <form>
+                         <div class="mb-3">
+							<label for="standardBF">標準_Standard (%):</label>
+							<input id="standardBF" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="mb-3">
+							<label for="currentBF">現行_Current (%):</label>
+							<input id="currentBF" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="mb-3">
+							<label for="postBF">賽後_Post (%):</label>
+							<input id="postBF" type="number" step="0.1" class="form-control">
+                        </div>
+                   </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="currentBF">現行體脂肪率_CurrentBF (%):</label>
-            <input id="currentBF" type="number" step="0.1" class="form-control readonly-input" readonly>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    內脂肪_VisceralFat
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+							<label for="standardVisceralFat">標準_Standard (g):</label>
+							<input id="standardVisceralFat" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="mb-3">
+							<label for="currentVisceralFat">現行_Current (g):</label>
+							<input id="currentVisceralFat" type="number" step="0.1" class="form-control readonly-input" readonly>
+                        </div>
+                        <div class="mb-3">
+							<label for="postVisceralFat">賽後_Post (g):</label>
+							<input id="postVisceralFat" type="number" step="0.1" class="form-control">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="postBF">賽後體脂肪率_PostBF (%):</label>
-            <input id="postBF" type="number" step="0.1" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="standardBF">標準體脂肪率_StandardBF (%):</label>
-            <input id="standardBF" type="number" step="0.1" class="form-control readonly-input" readonly>
-        </div>
-        <div class="form-group">
-            <label for="currentVisceralFat">現行內脂肪_CurrentVisceralFat (g):</label>
-            <input id="currentVisceralFat" type="number" step="0.1" class="form-control readonly-input" readonly>
-        </div>
-        <div class="form-group">
-            <label for="postVisceralFat">賽後內脂肪_PostVisceralFat (g):</label>
-            <input id="postVisceralFat" type="number" step="0.1" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="standardVisceralFat">標準內脂肪_StandardVisceralFat (g):</label>
-            <input id="standardVisceralFat" type="number" step="0.1" class="form-control readonly-input" readonly>
-        </div>
-        <div class="form-group">
-            <label for="currentHeight">現行身高_CurrentHeight (cm):</label>
-            <input id="currentHeight" type="number" step="0.1" class="form-control readonly-input" readonly>
-        </div>
-        <div class="form-group">
-            <label for="standardHeight">標準身高_StandardHeight (cm):</label>
-            <input id="standardHeight" type="number" step="0.1" class="form-control readonly-input" readonly>
-        </div>
+
         <button onclick="calculate()" class="btn btn-primary">計算分數_Calculate</button>
         <div id="result"></div>
 		<pre>Score = ((Current Weight - Post Weight) / (Current Weight - Standard Weight)) * 30 +
@@ -175,6 +224,22 @@
 			document.getElementById("standardBF").value = 21;
 			document.getElementById("standardVisceralFat").value = 7;
 		}
+    </script>
+    <script>
+        const headings = [
+            '減重比賽計算器',
+            'Weight Loss Competition Calculator'
+        ];
+        let currentIndex = 0;
+
+        function switchHeading() {
+            currentIndex = (currentIndex + 1) % headings.length;
+            $('#main-heading').fadeOut(1000, function() {
+                $(this).text(headings[currentIndex]).fadeIn(1000);
+            });
+        }
+
+        setInterval(switchHeading, 5000);
     </script>
 	</body>
 </html>
