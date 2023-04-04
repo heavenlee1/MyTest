@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>減重比賽計算器</title>
+    <!-- 引入Bootstrap 5 和jQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+		.readonly-input {
+			background-color: #f8f9fa;
+			color: #6c757d;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>減重比賽計算器</h1>
+		
+		<button id="btnMan1" onclick="setDefaultValuesMan1()" class="btn btn-outline-primary">定遠</button>
+		<button id="btnMan2" onclick="setDefaultValuesMan2()" class="btn btn-outline-primary">やす</button>
+		<button id="btnWoman1" onclick="setDefaultValuesWoman()" class="btn btn-outline-primary">Miya</button>
+		
+        <div class="form-group">
+            <label for="currentWeight">現行體重_CurrentWeight (kg):</label>
+            <input id="currentWeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="postWeight">賽後體重_PostWeight (kg):</label>
+            <input id="postWeight" type="number" step="0.1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="standardWeight">標準體重_StandardWeight (kg):</label>
+            <input id="standardWeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="currentBF">現行體脂肪率_CurrentBF (%):</label>
+            <input id="currentBF" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="postBF">賽後體脂肪率_PostBF (%):</label>
+            <input id="postBF" type="number" step="0.1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="standardBF">標準體脂肪率_StandardBF (%):</label>
+            <input id="standardBF" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="currentVisceralFat">現行內脂肪_CurrentVisceralFat (g):</label>
+            <input id="currentVisceralFat" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="postVisceralFat">賽後內脂肪_PostVisceralFat (g):</label>
+            <input id="postVisceralFat" type="number" step="0.1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="standardVisceralFat">標準內脂肪_StandardVisceralFat (g):</label>
+            <input id="standardVisceralFat" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="currentHeight">現行身高_CurrentHeight (cm):</label>
+            <input id="currentHeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <div class="form-group">
+            <label for="standardHeight">標準身高_StandardHeight (cm):</label>
+            <input id="standardHeight" type="number" step="0.1" class="form-control readonly-input" readonly>
+        </div>
+        <button onclick="calculate()" class="btn btn-primary">計算分數_Calculate</button>
+        <div id="result"></div>
+		<pre>Score = ((Current Weight - Post Weight) / (Current Weight - Standard Weight)) * 30 +
+((Current BF - Post BF) / (Current BF - Standard BF)) * 30 +
+((Current Visceral Fat - Post Visceral Fat) / (Current Visceral Fat - Standard Visceral Fat)) * 30 +
+((Current Height - Standard Height) / Current Height) * 10</pre>
+    </div>
+    <script>
+        function calculate() {
+            const currentWeight = parseFloat(document.getElementById("currentWeight").value);
+            const postWeight = parseFloat(document.getElementById("postWeight").value);
+            const standardWeight = parseFloat(document.getElementById("standardWeight").value);
+            const currentBF = parseFloat(document.getElementById("currentBF").value);
+            const postBF = parseFloat(document.getElementById("postBF").value);
+            const standardBF = parseFloat(document.getElementById("standardBF").value);
+            const currentVisceralFat = parseFloat(document.getElementById("currentVisceralFat").value);
+            const postVisceralFat = parseFloat(document.getElementById("postVisceralFat").value);
+            const standardVisceralFat = parseFloat(document.getElementById("standardVisceralFat").value);
+            const currentHeight = parseFloat(document.getElementById("currentHeight").value);
+            const standardHeight = parseFloat(document.getElementById("standardHeight").value);
+
+            const score = ((currentWeight - postWeight) / (currentWeight - standardWeight)) * 30 +
+                ((currentBF - postBF) / (currentBF - standardBF)) * 30 +
+                ((currentVisceralFat - postVisceralFat) / (currentVisceralFat - standardVisceralFat)) * 30 +
+                ((currentHeight - standardHeight) / currentHeight) * 10;
+
+            document.getElementById("result").innerText = "分數: " + score.toFixed(2);
+        }
+
+		function setDefaultValuesMan1() {
+			// 修改按鈕樣式
+			document.getElementById("btnMan1").classList.remove("btn-outline-primary");
+			document.getElementById("btnMan1").classList.add("btn-primary");
+			document.getElementById("btnMan2").classList.add("btn-outline-primary");
+			document.getElementById("btnMan2").classList.remove("btn-primary");
+			document.getElementById("btnWoman1").classList.add("btn-outline-primary");
+			document.getElementById("btnWoman1").classList.remove("btn-primary");
+
+			document.getElementById("currentWeight").value = 84;
+			document.getElementById("currentBF").value = 24;
+			document.getElementById("currentVisceralFat").value = 11;
+			document.getElementById("currentHeight").value = 176;
+			document.getElementById("standardHeight").value = 172;
+			document.getElementById("standardWeight").value = 67.2;
+			document.getElementById("standardBF").value = 17;
+			document.getElementById("standardVisceralFat").value = 7;
+		}
+
+		function setDefaultValuesMan2() {
+			// 修改按鈕樣式
+			document.getElementById("btnMan2").classList.remove("btn-outline-primary");
+			document.getElementById("btnMan2").classList.add("btn-primary");
+			document.getElementById("btnMan1").classList.add("btn-outline-primary");
+			document.getElementById("btnMan1").classList.remove("btn-primary");
+			document.getElementById("btnWoman1").classList.add("btn-outline-primary");
+			document.getElementById("btnWoman1").classList.remove("btn-primary");
+
+			document.getElementById("currentWeight").value = 90;
+			document.getElementById("currentBF").value = 26;
+			document.getElementById("currentVisceralFat").value = 13;
+			document.getElementById("currentHeight").value = 176;
+			document.getElementById("standardHeight").value = 172;
+			document.getElementById("standardWeight").value = 67.2;
+			document.getElementById("standardBF").value = 17;
+			document.getElementById("standardVisceralFat").value = 7;
+		}
+
+		function setDefaultValuesWoman() {
+			// 修改按鈕樣式
+			document.getElementById("btnWoman1").classList.remove("btn-outline-primary");
+			document.getElementById("btnWoman1").classList.add("btn-primary");
+			document.getElementById("btnMan2").classList.add("btn-outline-primary");
+			document.getElementById("btnMan2").classList.remove("btn-primary");
+			document.getElementById("btnMan1").classList.add("btn-outline-primary");
+			document.getElementById("btnMan1").classList.remove("btn-primary");
+
+			document.getElementById("currentWeight").value = 68;
+			document.getElementById("currentBF").value = 25;
+			document.getElementById("currentVisceralFat").value = 12;
+			document.getElementById("currentHeight").value = 160;
+			document.getElementById("standardHeight").value = 158;
+			document.getElementById("standardWeight").value = 54;
+			document.getElementById("standardBF").value = 21;
+			document.getElementById("standardVisceralFat").value = 7;
+		}
+    </script>
+	</body>
+</html>
